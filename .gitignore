@@ -1,0 +1,20 @@
+
+!/.mvn/wrapper/maven-wrapper.jar
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+*.h5
+*.hprof
+*.pem
+*.zip
+.idea/
+.mvn/timing.properties
+buildNumber.properties
+dependency-reduced-pom.xml
+examples.deepart.studio.iml examples.deepartist.org.iml
+examples.deepartist.org.iml examples.deepart.studio.iml
+pom.xml.next
+pom.xml.releaseBackup
+pom.xml.tag
+pom.xml.versionsBackup
+release.properties
+report/
+target/
