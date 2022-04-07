@@ -27,7 +27,7 @@
         <version>2.1.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>v2.examples.deepartist.org</artifactId>
+    <artifactId>openai-tools</artifactId>
     <description>DeepArtist.org Example Jobs</description>
 
 
@@ -51,16 +51,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.twitter</groupId>
-            <artifactId>chill_${scala.mjversion}</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.twitter</groupId>
-            <artifactId>chill-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.esotericsoftware</groupId>
-            <artifactId>kryo</artifactId>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-core</artifactId>
+            <version>3.24.2</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -93,13 +86,7 @@
         </dependency>
         <dependency>
             <groupId>com.simiacryptus</groupId>
-            <artifactId>mindseye-art</artifactId>
-
-        </dependency>
-        <dependency>
-            <groupId>com.simiacryptus</groupId>
             <artifactId>deepartist.org</artifactId>
-
         </dependency>
         <dependency>
             <groupId>com.simiacryptus</groupId>
@@ -212,11 +199,11 @@
         </dependency>
     </dependencies>
 
-    <url>http://code.simiacrypt.us/release/${project.version}/examples.deepartist.org</url>
+    <url>http://code.simiacrypt.us/release/${project.version}/openai-tools</url>
     <distributionManagement>
         <site>
             <id>simiacryptus</id>
-            <url>s3://code.simiacrypt.us/release/${project.version}/examples.deepartist.org</url>
+            <url>s3://code.simiacrypt.us/release/${project.version}/openai-tools</url>
         </site>
     </distributionManagement>
 </project>
