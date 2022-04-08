@@ -12,6 +12,7 @@ trait OpenAIAPI {
   val apiBase = "https://api.openai.com/v1"
   //  val model = "text-ada-001"
   val model = "text-davinci-002"
+  val key = "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"
 
   lazy val engines = getMapper().readValue(getRequest(apiBase + "/engines"), classOf[Response]).data
 
@@ -60,7 +61,7 @@ trait OpenAIAPI {
   }
 
   def authorize(request: HttpRequestBase) = {
-    request.addHeader("Authorization", "Bearer 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")
+    request.addHeader("Authorization", "Bearer " + key)
   }
 
   def getRequest(url: String): String = {

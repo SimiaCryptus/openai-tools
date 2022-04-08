@@ -2,9 +2,13 @@ package com.simiacryptus.mindseye.lab
 
 trait OpenAICommentGenerator extends CommentGenerator with OpenAIAPI {
 
+  val sourceLanguage = "Scala"
+  val targetLanguage = "English"
+  val targetDescription = "code comment"
+
   def testComment(codeData: String, indent: String): String = {
     var documentation = "/**\n *"
-    var prompt = "Translate this Scala into an English code comment:\n\nScala:\n\n" + codeData + "\n\nEnglish:\n\n" + documentation
+    var prompt = "Translate this " + sourceLanguage + " into an " + targetLanguage + " " + targetDescription + ":\n\n" + sourceLanguage + ":\n\n" + codeData + "\n\n" + targetLanguage + ":\n\n" + documentation
 
     def advance() = {
       val response = getMapper().readValue(complete(
