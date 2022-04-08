@@ -2,17 +2,19 @@ package com.simiacryptus.mindseye.lab
 
 import com.fasterxml.jackson.databind.{MapperFeature, ObjectMapper, SerializationFeature}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import com.simiacryptus.mindseye.lab.GenerateScaladoc.apiBase
+import org.apache.commons.io.FileUtils
 import org.apache.http.client.methods.{HttpGet, HttpPost, HttpRequestBase}
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClientBuilder
 import org.apache.http.util.EntityUtils
 
+import java.io.File
+
 trait OpenAIAPI {
   val apiBase = "https://api.openai.com/v1"
   //  val model = "text-ada-001"
   val model = "text-davinci-002"
-  val key = "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"
+  lazy val key = FileUtils.readFileToString(new File("openai.key"),"UTF-8").trim
 
   lazy val engines = getMapper().readValue(getRequest(apiBase + "/engines"), classOf[Response]).data
 

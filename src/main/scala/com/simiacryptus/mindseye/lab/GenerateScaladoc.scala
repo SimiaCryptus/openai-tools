@@ -9,15 +9,19 @@ import scala.meta.Term._
 
 object GenerateScaladoc extends OpenAICommentGenerator {
   val root = new File("""C:\Users\andre\code\all-projects\deepartist\deepartist.org\""")
-  val language = "scala"
+  val languageExtension = "scala"
   val version_class = 9
   val version_method = 9
+
+  override val sourceLanguage = "Scala"
+  override val targetLanguage = "English"
+  override val targetDescription = "description in ScalaDoc format"
 
   def main(args: Array[String]): Unit = {
 
 
     println("Root: " + root.getAbsolutePath)
-    val files = FileUtils.listFiles(root, Array(language), true).asScala.toList
+    val files = FileUtils.listFiles(root, Array(languageExtension), true).asScala.toList
     println(s"Found ${files.size} files")
     for (file <- files) {
       println("File: " + file.getAbsolutePath)
@@ -36,7 +40,7 @@ object GenerateScaladoc extends OpenAICommentGenerator {
           val start = _class.pos.start
           if (GenerateJavadoc.getDocgenVersion(data, start).getOrElse(-1) < version_class) {
             println(s"Class Definition: $definition")
-            val comment = testComment(definition, GenerateJavadoc.spaces(_class.pos.startColumn))
+            val comment = getDocumentationComment(definition, GenerateJavadoc.spaces(_class.pos.startColumn))
             edits ++= List((start, GenerateJavadoc.injectDocgenVersion(comment, version_class)))
           }
 
@@ -52,7 +56,7 @@ object GenerateScaladoc extends OpenAICommentGenerator {
             } else {
               definition
             }
-            val comment = testComment(info, GenerateJavadoc.spaces(_method.pos.startColumn))
+            val comment = getDocumentationComment(info, GenerateJavadoc.spaces(_method.pos.startColumn))
             edits ++= List((start, GenerateJavadoc.injectDocgenVersion(comment, version_method)))
           }
 

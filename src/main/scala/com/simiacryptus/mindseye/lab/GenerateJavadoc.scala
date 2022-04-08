@@ -13,8 +13,8 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.Random.shuffle
 
 object GenerateJavadoc extends OpenAICommentGenerator {
-  val root = new File("""C:\Users\andre\code\all-projects\java-reference-counter\""")
-  val language = "java"
+  val root = new File("""C:\Users\andre\code\all-projects\mindseye\mindseye-java\""")
+  val languageExtension = "java"
   val version_class = 9
   val version_method = 9
   val maxFiles = 1000
@@ -27,7 +27,7 @@ object GenerateJavadoc extends OpenAICommentGenerator {
   def main(args: Array[String]): Unit = {
 
     println("Root: " + root.getAbsolutePath)
-    val files = FileUtils.listFiles(root, Array(language), true).asScala.toList
+    val files = FileUtils.listFiles(root, Array(languageExtension), true).asScala.toList
     println(s"Found ${files.size} files")
     for (file <- shuffle(files).take(maxFiles)) {
       println("File: " + file.getAbsolutePath)
@@ -54,7 +54,7 @@ object GenerateJavadoc extends OpenAICommentGenerator {
           val definition = declaration.toString
           if (getDocgenVersion(data, start).getOrElse(-1) < version_class) {
             println(s"Class Definition: $definition")
-            val comment = testComment(definition, spaces(begin.column))
+            val comment = getDocumentationComment(definition, spaces(begin.column))
             edits ++= List((start, injectDocgenVersion(comment, version_class)))
           }
 
@@ -75,13 +75,18 @@ object GenerateJavadoc extends OpenAICommentGenerator {
               case _ => // Ignore
             })
             val definition = declaration.toString
-            println(s"Method Definition: $definition")
-            val comment = testComment(definition, spaces(begin.column))
-            edits ++= List((start, injectDocgenVersion(comment, version_class)))
+            if ("""(?s)(?<![\w\d])private(?![\w\d])""".r.findFirstMatchIn(definition).nonEmpty) {
+                println(s"Private Method")
+              } else if ("""@Override(?!\w)""".r.findFirstMatchIn(definition).nonEmpty) {
+                println(s"Overridden Method")
+              } else {
+                println(s"Method Definition: $definition")
+                val comment = getDocumentationComment(definition, spaces(begin.column))
+                edits ++= List((start, injectDocgenVersion(comment, version_class)))
+              }
+            }
+            super.visit(n, arg)
           }
-
-          super.visit(n, arg)
-        }
       }, null)
 
       var workingData = data

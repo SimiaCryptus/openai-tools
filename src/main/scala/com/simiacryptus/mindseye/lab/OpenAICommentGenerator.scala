@@ -6,7 +6,7 @@ trait OpenAICommentGenerator extends CommentGenerator with OpenAIAPI {
   val targetLanguage = "English"
   val targetDescription = "code comment"
 
-  def testComment(codeData: String, indent: String): String = {
+  def getDocumentationComment(codeData: String, indent: String): String = {
     var documentation = "/**\n *"
     var prompt = "Translate this " + sourceLanguage + " into an " + targetLanguage + " " + targetDescription + ":\n\n" + sourceLanguage + ":\n\n" + codeData + "\n\n" + targetLanguage + ":\n\n" + documentation
 
