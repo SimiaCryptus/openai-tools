@@ -23,12 +23,13 @@
 
     <parent>
         <groupId>com.simiacryptus</groupId>
-        <artifactId>deepartist</artifactId>
+        <artifactId>scala-parent</artifactId>
         <version>2.1.1-SNAPSHOT</version>
+        <relativePath>../../mvn-parents/scala-parent</relativePath>
     </parent>
 
     <artifactId>openai-tools</artifactId>
-    <description>DeepArtist.org Example Jobs</description>
+    <description>Text processing tools with a focus on utilizing OpenAI's API</description>
 
 
     <properties>
@@ -50,6 +51,17 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.stanford.nlp</groupId>
+            <artifactId>stanford-corenlp</artifactId>
+            <version>4.4.0</version>
+            <classifier>models</classifier>
+        </dependency>
         <dependency>
             <groupId>com.github.javaparser</groupId>
             <artifactId>javaparser-core</artifactId>
@@ -77,22 +89,6 @@
             <artifactId>log4j-over-slf4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.simiacryptus</groupId>
-            <artifactId>java-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.simiacryptus</groupId>
-            <artifactId>aws-utilities</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.simiacryptus</groupId>
-            <artifactId>deepartist.org</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.simiacryptus</groupId>
-            <artifactId>sparkbook</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala.mjversion}</artifactId>
             <scope>test</scope>
@@ -118,84 +114,48 @@
             <artifactId>commons-io</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${scala.mjversion}</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.scalameta</groupId>
             <artifactId>scalameta_${scala.mjversion}</artifactId>
             <version>4.5.2</version>
         </dependency>
-
         <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${scala.mjversion}</artifactId>
-            <scope>compile</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcudnn-natives</artifactId>
-            <classifier>linux-x86_64</classifier>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcuda-natives</artifactId>
-            <classifier>linux-x86_64</classifier>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_${scala.mjversion}</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <scope>compile</scope>
+            <artifactId>commons-text</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-aws</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcusparse-natives</artifactId>
-            <classifier>windows-x86_64</classifier>
-
-            <scope>compile</scope>
+            <groupId>com.simiacryptus</groupId>
+            <artifactId>java-util</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcusolver-natives</artifactId>
-            <classifier>windows-x86_64</classifier>
-
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcusparse-natives</artifactId>
-            <classifier>linux-x86_64</classifier>
-
-            <scope>compile</scope>
+            <groupId>com.github.jai-imageio</groupId>
+            <artifactId>jai-imageio-core</artifactId>
+            <version>1.4.0</version>
         </dependency>
         <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcusolver-natives</artifactId>
-            <classifier>linux-x86_64</classifier>
-
-            <scope>compile</scope>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>9.4.46.v20220331</version>
         </dependency>
         <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcudnn-natives</artifactId>
-            <classifier>linux-x86_64</classifier>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jcuda</groupId>
-            <artifactId>jcuda-natives</artifactId>
-            <classifier>linux-x86_64</classifier>
-            <scope>compile</scope>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.4.46.v20220331</version>
         </dependency>
     </dependencies>
 
